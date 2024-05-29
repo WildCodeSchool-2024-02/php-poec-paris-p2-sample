@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+- Ajouter une tâche
+{% endblock %}
+
+{% block body %}
+
+<h1>Add a New Task</h1>
+<form action="" method="post">
+    {% if errors.label %}
+        <p class="error">{{ errors.label }}</p>
+    {% endif %}
+
+    <label for="label" class="{% if errors.label %} error {% endif %}">Task Label:</label><br>
+    <textarea id="label" name="label" rows="4" cols="50"></textarea>
+    
+    <br><br>
+
+    {% if errors.priority %}
+        <p class="error">{{ errors.priority }}</p>
+    {% endif %}
+
+    <label for="priority">Priority:</label><br>
+    <select id="priority" name="priority" required>
+        {% for priority in constant('App\\Model\\TaskManager::PRIORITIES') %}
+            <option value="{{ priority.level }}">{{ priority.label }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <input type="submit" value="Ajouter">
+</form>
+
+{% endblock %}
