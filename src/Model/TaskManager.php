@@ -22,10 +22,8 @@ class TaskManager extends AbstractManager
      */
     public function insert(array $task): int
     {
-        $createdAt = new DateTime('now');
-
-        $query = "INSERT INTO " . self::TABLE . " (`label`, `status`, `priority`, `created_at`) ";
-        $query .= "VALUES (:label, '" . $task['status'] . "', :priority, '" . $createdAt->format('Y-m-d h:i:s') . "')";
+        $query = "INSERT INTO " . self::TABLE . " (`label`, `status`, `priority`) ";
+        $query .= "VALUES (:label, '" . $task['status'] . "', :priority)";
 
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':label', $task['label'], PDO::PARAM_STR);

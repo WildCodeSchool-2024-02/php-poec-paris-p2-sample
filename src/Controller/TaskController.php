@@ -6,12 +6,12 @@ use App\Model\TaskManager;
 
 class TaskController extends AbstractController
 {
-    private TaskManager $taskManager;
+    private TaskManager $manager;
 
     public function __construct()
     {
         parent::__construct();
-        $this->taskManager = new TaskManager();
+        $this->manager = new TaskManager();
     }
 
     /**
@@ -35,7 +35,7 @@ class TaskController extends AbstractController
             if (empty($errors)) {
                 $task['status'] = TaskManager::STATUS_PENDING;
 
-                $this->taskManager->insert($task);
+                $this->manager->insert($task);
             }
         }
 
