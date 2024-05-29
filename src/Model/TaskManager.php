@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use PDO;
-use DateTime;
 
 class TaskManager extends AbstractManager
 {
