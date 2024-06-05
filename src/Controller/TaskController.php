@@ -19,9 +19,7 @@ class TaskController extends AbstractController
      */
     public function add(): string
     {
-        if (!empty($_SESSION['user_id'])) {
-            echo 'Mon USER : ' . $_SESSION['user_id'];
-        } else {
+        if (empty($_SESSION['user_id'])) {
             header('Location: /login');
         }
 
