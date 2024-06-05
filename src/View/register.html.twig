@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+- Register
+{% endblock %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data">
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+        
+        <div>
+            <label for="avatar">Photo de profil :</label>
+            <input type="file" name="avatar" id="avatar">
+        </div>
+        <div>
+            <label for="firstname">Prénom :</label>
+            <input type="text" name="firstname" id="firstname">
+        </div>
+        <div>
+            <label for="lastname">Nom :</label>
+            <input type="text" name="lastname" id="lastname">
+        </div>
+        <div>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" name="pseudo" id="pseudo">
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div>
+            <label for="password_confirmation">Confirmation de mot de passe :</label>
+            <input type="password" name="password_confirmation" id="password_confirmation">
+        </div>
+
+
+        <input type="submit" value="S'inscrire">
+    </form>
+{% endblock %}

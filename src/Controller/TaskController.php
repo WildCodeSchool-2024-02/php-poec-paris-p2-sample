@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 use App\Model\TaskManager;
+use App\Model\UserManager;
 
 class TaskController extends AbstractController
 {
     private TaskManager $manager;
+    private UserManager $userManager;
 
     public function __construct()
     {
         parent::__construct();
         $this->manager = new TaskManager();
+        $this->userManager = new UserManager();
     }
 
     /**
@@ -21,6 +24,7 @@ class TaskController extends AbstractController
     {
         if (empty($_SESSION['user_id'])) {
             header('Location: /login');
+            exit();
         }
 
         $errors = [];
@@ -44,6 +48,7 @@ class TaskController extends AbstractController
         }
 
         return $this->twig->render('Task/add.html.twig', [
+            'user' => $this->userManager->selectOneById($_SESSION['user_id']),
             'errors' => $errors,
         ]);
     }

@@ -9,6 +9,7 @@
 return [
     '' => ['TaskController', 'add', ],
     'task/add' => ['TaskController', 'add',],
+    'register' => ['UserController', 'register'],
     'login' => ['UserController', 'login'],
     'logout' => ['UserController', 'logout'],
 ];
