@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 05 juin 2024 à 14:24
+-- Généré le : mer. 05 juin 2024 à 15:33
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.3.6
 
@@ -32,12 +32,17 @@ CREATE TABLE `task` (
   `label` varchar(255) NOT NULL,
   `status` varchar(15) NOT NULL,
   `priority` int NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `task`
 --
+
+INSERT INTO `task` (`id`, `label`, `status`, `priority`, `created_at`, `user_id`) VALUES
+(1, 'Finir les live coding plus t&ocirc;t', 'pending', 3, '2024-05-27 03:43:12', 0),
+(2, 'Coucou', 'pending', 3, '2024-05-27 03:45:39', 0);
 
 -- --------------------------------------------------------
 
@@ -51,16 +56,18 @@ CREATE TABLE `user` (
   `lastname` varchar(200) NOT NULL,
   `pseudo` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `avatar` varchar(255) DEFAULT NULL
+  `avatar` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `pseudo`, `password`, `avatar`) VALUES
-(1, 'Nassim', 'Boussaid', 'legoat', '$2y$10$I000bisHLQg0kkCKEAQYkuS6PXlt4XIsIm6XRiLiN0udDIKm7gfX2', NULL),
-(2, 'Stéphanie', 'Cartalier', 'bgette', '$2y$10$I000bisHLQg0kkCKEAQYkuS6PXlt4XIsIm6XRiLiN0udDIKm7gfX2', NULL);
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `pseudo`, `password`, `avatar`, `created_at`) VALUES
+(1, 'Nassim', 'Boussaid', 'legoat', '$2y$10$I000bisHLQg0kkCKEAQYkuS6PXlt4XIsIm6XRiLiN0udDIKm7gfX2', NULL, '2024-06-05 16:38:06'),
+(2, 'Stéphanie', 'Cartalier', 'bgette', '$2y$10$I000bisHLQg0kkCKEAQYkuS6PXlt4XIsIm6XRiLiN0udDIKm7gfX2', NULL, '2024-06-05 16:38:06'),
+(8, 'Micka&euml;l', 'Lambert', 'mclambert', '$2y$10$AxUx3OoGcEwbNA9R61MmCeHXAMH0UxdBRj4WtxPxDzGMgs5aHeYEe', '1711378638794.jpeg', '2024-06-05 17:18:11');
 
 --
 -- Index pour les tables déchargées
@@ -92,7 +99,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

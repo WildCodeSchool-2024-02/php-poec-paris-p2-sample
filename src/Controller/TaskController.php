@@ -24,7 +24,6 @@ class TaskController extends AbstractController
     {
         if (empty($_SESSION['user_id'])) {
             header('Location: /login');
-            exit();
         }
 
         $errors = [];
@@ -42,6 +41,7 @@ class TaskController extends AbstractController
 
             if (empty($errors)) {
                 $task['status'] = TaskManager::STATUS_PENDING;
+                $task['user_id'] = $_SESSION['user_id'];
 
                 $this->manager->insert($task);
             }
