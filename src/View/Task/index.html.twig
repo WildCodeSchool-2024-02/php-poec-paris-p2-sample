@@ -1,6 +1,16 @@
 Liste des tâches
 
-{{ dump(tasks) }}
+{% for task in tasks %}
+    <p>Tache #{{ task.id }}</p>
+    <ul>
+        <li>Label : {{ task.label|raw }}</li>
+        <li>Status : {{ task.status }}</li>
+        <li>Priorité : {{ task.priority }} {{ constant('App\\Model\\TaskManager::TABLE') }}</li>
+        <li>Date de création : {{ task.created_at|date() }}</li>
+        <li>Catégorie : {{ task.category_label }}</li>
+    </ul>
+{% endfor %}
+
 
 <a href="/task/add">Ajouter une tâche</a>
 <a href="/logout">Se déconnecter</a>

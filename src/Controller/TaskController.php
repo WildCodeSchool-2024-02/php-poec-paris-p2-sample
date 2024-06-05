@@ -4,17 +4,20 @@ namespace App\Controller;
 
 use App\Model\TaskManager;
 use App\Model\UserManager;
+use App\Model\CategoryManager;
 
 class TaskController extends AbstractController
 {
     private TaskManager $manager;
     private UserManager $userManager;
+    private CategoryManager $categoryManager;
 
     public function __construct()
     {
         parent::__construct();
         $this->manager = new TaskManager();
         $this->userManager = new UserManager();
+        $this->categoryManager = new CategoryManager();
     }
 
     public function index(): string
@@ -51,16 +54,24 @@ class TaskController extends AbstractController
                 $errors['priority'] = 'Enter a priority';
             }
 
+            if (empty($task['category'])) {
+                $errors['category'] = 'Enter a category';
+            }
+
             if (empty($errors)) {
                 $task['status'] = TaskManager::STATUS_PENDING;
                 $task['user_id'] = $_SESSION['user_id'];
 
                 $this->manager->insert($task);
+
+                header('Location: /task');
+                exit();
             }
         }
 
         return $this->twig->render('Task/add.html.twig', [
             'user' => $this->userManager->selectOneById($_SESSION['user_id']),
+            'categories' => $this->categoryManager->selectAll(),
             'errors' => $errors,
         ]);
     }

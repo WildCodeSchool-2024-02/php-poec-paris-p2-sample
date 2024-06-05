@@ -21,12 +21,13 @@ class TaskManager extends AbstractManager
      */
     public function insert(array $task): int
     {
-        $query = "INSERT INTO " . self::TABLE . " (`label`, `status`, `priority`, `user_id`) ";
-        $query .= "VALUES (:label, '" . $task['status'] . "', :priority, '" . $task['user_id'] . "')";
+        $query = "INSERT INTO " . self::TABLE . " (`label`, `status`, `priority`, `user_id`, `category_id`) ";
+        $query .= "VALUES (:label, '" . $task['status'] . "', :priority, '" . $task['user_id'] . "', :category)";
 
         $statement = $this->pdo->prepare($query);
         $statement->bindValue(':label', $task['label'], PDO::PARAM_STR);
         $statement->bindValue(':priority', $task['priority'], PDO::PARAM_INT);
+        $statement->bindValue(':category', $task['category'], PDO::PARAM_INT);
 
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
@@ -34,7 +35,9 @@ class TaskManager extends AbstractManager
 
     public function selectAllByUser(int $userId) 
     {
-        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = ' . $userId;
+        $query = 'SELECT task.*, category.label AS category_label FROM task ';
+        $query .= 'JOIN category ON category.id = task.category_id ';
+        $query .= 'WHERE user_id = ' . $userId;
 
         return $this->pdo->query($query)->fetchAll();
     }

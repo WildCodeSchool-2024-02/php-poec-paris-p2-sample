@@ -32,6 +32,15 @@
 
     <br><br>
 
+    <label for="category">Category:</label><br>
+    <select id="category" name="category" required>
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.label }}</option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
     <input type="submit" value="Ajouter">
 </form>
 
