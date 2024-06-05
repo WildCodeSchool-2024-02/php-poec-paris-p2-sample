@@ -17,6 +17,18 @@ class TaskController extends AbstractController
         $this->userManager = new UserManager();
     }
 
+    public function index(): string
+    {
+        if (empty($_SESSION['user_id'])) {
+            header('Location: /login');
+            exit();
+        }
+
+        return $this->twig->render('Task/index.html.twig', [
+            'tasks' => $this->manager->selectAllByUser($_SESSION['user_id'])
+        ]);
+    }
+
     /**
      * Add task
      */

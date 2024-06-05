@@ -31,4 +31,11 @@ class TaskManager extends AbstractManager
         $statement->execute();
         return (int)$this->pdo->lastInsertId();
     }
+
+    public function selectAllByUser(int $userId) 
+    {
+        $query = 'SELECT * FROM ' . self::TABLE . ' WHERE user_id = ' . $userId;
+
+        return $this->pdo->query($query)->fetchAll();
+    }
 }
