@@ -6,6 +6,10 @@
 
 {% block body %}
     <form action="" method="post">
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+        
         <div>
             <label for="pseudo">Pseudo :</label>
             <input type="text" name="pseudo" id="pseudo">
