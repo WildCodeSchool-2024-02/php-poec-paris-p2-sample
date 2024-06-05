@@ -6,6 +6,8 @@
 
 {% block body %}
 
+<img src="avatars/{{ user.avatar}}" alt="Photo de profil">
+
 <h1>Add a New Task</h1>
 <form action="" method="post">
     {% if errors.label %}
@@ -32,5 +34,7 @@
 
     <input type="submit" value="Ajouter">
 </form>
+
+<a href="/logout">Se déconnecter</a>
 
 {% endblock %}
