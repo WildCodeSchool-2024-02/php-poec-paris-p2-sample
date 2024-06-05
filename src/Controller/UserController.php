@@ -14,6 +14,13 @@ class UserController extends AbstractController
         $this->manager = new UserManager();
     }
 
+    public function register(): string
+    {
+        return $this->twig->render('register.html.twig', [
+
+        ]);
+    }
+
     /**
      * Log to the application
      */
