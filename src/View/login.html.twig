@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+- Login
+{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        {% for error in errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+        
+        <div>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" name="pseudo" id="pseudo">
+        </div>
+        <div>
+            <label for="pseudo">Mot de passe :</label>
+            <input type="password" name="password" id="password">
+        </div>
+
+        <input type="submit" value="Se connecter">
+    </form>
+{% endblock %}
